@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Video, Settings, LogOut, TrendingUp, Moon, Sun } from "lucide-react";
+import { Video, Settings, LogOut, TrendingUp, Moon, Sun, Monitor } from "lucide-react";
 import { useTheme } from "next-themes";
 
 interface DashboardHeaderProps {
@@ -14,8 +14,24 @@ interface DashboardHeaderProps {
 export const DashboardHeader = ({ userEmail, onNewVideo, onLogout }: DashboardHeaderProps) => {
   const { theme, setTheme } = useTheme();
 
-  const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
+  const cycleTheme = () => {
+    if (theme === "light") {
+      setTheme("dark");
+    } else if (theme === "dark") {
+      setTheme("darker");
+    } else {
+      setTheme("light");
+    }
+  };
+
+  const getThemeIcon = () => {
+    if (theme === "light") {
+      return <Sun className="h-4 w-4" />;
+    } else if (theme === "dark") {
+      return <Moon className="h-4 w-4" />;
+    } else {
+      return <Monitor className="h-4 w-4" />;
+    }
   };
 
   return (
@@ -45,11 +61,11 @@ export const DashboardHeader = ({ userEmail, onNewVideo, onLogout }: DashboardHe
           <Button
             variant="ghost"
             size="icon"
-            onClick={toggleTheme}
+            onClick={cycleTheme}
             className="h-9 w-9"
+            title={`Alterar para ${theme === "light" ? "escuro" : theme === "dark" ? "muito escuro" : "claro"}`}
           >
-            <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-            <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+            {getThemeIcon()}
             <span className="sr-only">Alternar tema</span>
           </Button>
           
