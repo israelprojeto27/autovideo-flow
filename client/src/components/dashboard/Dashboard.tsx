@@ -183,6 +183,13 @@ export const Dashboard = ({ userEmail, onLogout }: DashboardProps) => {
     });
   };
 
+  const handleVideoDetails = (video: Video) => {
+    toast({
+      title: "Detalhes do vídeo",
+      description: `Mostrando informações detalhadas de: ${video.title}`
+    });
+  };
+
   const handleSocialConnect = (platformId: string) => {
     setSocialPlatforms(prev => prev.map(p =>
       p.id === platformId
@@ -278,6 +285,7 @@ export const Dashboard = ({ userEmail, onLogout }: DashboardProps) => {
                     onDownload={handleVideoDownload}
                     onPublish={handleVideoPublish}
                     onDuplicate={handleVideoDuplicate}
+                    onDetails={handleVideoDetails}
                   />
                 ))}
               </div>

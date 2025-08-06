@@ -10,7 +10,8 @@ import {
   Clock,
   CheckCircle,
   AlertCircle,
-  Loader2
+  Loader2,
+  Info
 } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
@@ -31,6 +32,7 @@ interface VideoCardProps {
   onDownload: (video: Video) => void;
   onPublish: (video: Video) => void;
   onDuplicate: (video: Video) => void;
+  onDetails: (video: Video) => void;
 }
 
 const StatusIcon = ({ status }: { status: Video['status'] }) => {
@@ -57,7 +59,7 @@ const getStatusBadge = (status: Video['status']) => {
   return statusConfig[status];
 };
 
-export const VideoCard = ({ video, onPlay, onDownload, onPublish, onDuplicate }: VideoCardProps) => {
+export const VideoCard = ({ video, onPlay, onDownload, onPublish, onDuplicate, onDetails }: VideoCardProps) => {
   const statusConfig = getStatusBadge(video.status);
   
   return (
@@ -159,6 +161,10 @@ export const VideoCard = ({ video, onPlay, onDownload, onPublish, onDuplicate }:
                     Download
                   </DropdownMenuItem>
                 )}
+                <DropdownMenuItem onClick={() => onDetails(video)}>
+                  <Info className="mr-2 h-4 w-4" />
+                  Detalhes
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
