@@ -24,6 +24,7 @@ export interface Video {
   createdAt: Date;
   publishedTo?: string[];
   originalUrl?: string;
+  errorDescription?: string;
 }
 
 interface VideoCardProps {

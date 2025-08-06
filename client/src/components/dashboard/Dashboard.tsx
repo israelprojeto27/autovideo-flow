@@ -54,7 +54,18 @@ const mockVideos: Video[] = [
     duration: 38,
     status: "error",
     createdAt: new Date(2024, 7, 4),
-    originalUrl: "https://youtube.com/watch?v=example4"
+    originalUrl: "https://youtube.com/watch?v=example4",
+    errorDescription: "Falha na extração de áudio - formato de vídeo não suportado ou vídeo muito longo"
+  },
+  {
+    id: "5",
+    title: "Tutorial de Node.js para iniciantes",
+    thumbnail: "",
+    duration: 0,
+    status: "error",
+    createdAt: new Date(2024, 7, 5),
+    originalUrl: "https://youtube.com/watch?v=example5",
+    errorDescription: "Vídeo não encontrado ou removido - URL inválida ou vídeo privado"
   }
 ];
 

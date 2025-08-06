@@ -55,7 +55,18 @@ const mockVideos: Video[] = [
     duration: 38,
     status: "error",
     createdAt: new Date(2024, 7, 4),
-    originalUrl: "https://youtube.com/watch?v=example4"
+    originalUrl: "https://youtube.com/watch?v=example4",
+    errorDescription: "Falha na extração de áudio - formato de vídeo não suportado ou vídeo muito longo"
+  },
+  {
+    id: "5",
+    title: "Tutorial de Node.js para iniciantes",
+    thumbnail: "",
+    duration: 0,
+    status: "error",
+    createdAt: new Date(2024, 7, 5),
+    originalUrl: "https://youtube.com/watch?v=example5",
+    errorDescription: "Vídeo não encontrado ou removido - URL inválida ou vídeo privado"
   }
 ];
 
@@ -219,6 +230,23 @@ const VideoDetails = () => {
                     {video.createdAt.toLocaleDateString('pt-BR')}
                   </span>
                 </div>
+
+                {video.status === 'error' && video.errorDescription && (
+                  <>
+                    <Separator />
+                    <div className="space-y-2">
+                      <span className="text-muted-foreground block">Motivo do Erro:</span>
+                      <div className="p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+                        <div className="flex items-start gap-2">
+                          <AlertCircle className="w-4 h-4 text-red-500 mt-0.5 flex-shrink-0" />
+                          <span className="text-sm text-red-700 dark:text-red-300">
+                            {video.errorDescription}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                )}
                 
                 {video.originalUrl && (
                   <>
