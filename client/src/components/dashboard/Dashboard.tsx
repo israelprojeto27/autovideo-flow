@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { useLocation } from "wouter";
 import { DashboardHeader } from "./DashboardHeader";
 import { StatsCards } from "./StatsCards";
 import { VideoCard, Video } from "./VideoCard";
@@ -85,6 +86,7 @@ export const Dashboard = ({ userEmail, onLogout }: DashboardProps) => {
   const [showNewVideoModal, setShowNewVideoModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
+  const [, setLocation] = useLocation();
   const { toast } = useToast();
 
   const filteredVideos = useMemo(() => {
@@ -184,10 +186,8 @@ export const Dashboard = ({ userEmail, onLogout }: DashboardProps) => {
   };
 
   const handleVideoDetails = (video: Video) => {
-    toast({
-      title: "Detalhes do vídeo",
-      description: `Mostrando informações detalhadas de: ${video.title}`
-    });
+    // Navigate to video details page using wouter
+    setLocation(`/video/${video.id}`);
   };
 
   const handleSocialConnect = (platformId: string) => {
