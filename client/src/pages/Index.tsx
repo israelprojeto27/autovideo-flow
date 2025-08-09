@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { LoginForm } from "@/components/auth/LoginForm";
 import { NicheSelection } from "@/components/auth/NicheSelection";
 import { Dashboard } from "@/components/dashboard/Dashboard";
@@ -10,8 +10,26 @@ const Index = () => {
   const [userEmail, setUserEmail] = useState('');
   const [selectedNiche, setSelectedNiche] = useState('');
 
+  // Check for existing session on component mount
+  useEffect(() => {
+    const savedUserEmail = localStorage.getItem('user_email');
+    const savedNiche = localStorage.getItem('user_niche');
+    
+    if (savedUserEmail) {
+      setUserEmail(savedUserEmail);
+      setSelectedNiche(savedNiche || '');
+      
+      if (savedNiche) {
+        setAppState('dashboard');
+      } else {
+        setAppState('niche-selection');
+      }
+    }
+  }, []);
+
   const handleLogin = (email: string) => {
     setUserEmail(email);
+    localStorage.setItem('user_email', email);
     // Check if it's the user's first access
     const isFirstAccess = !localStorage.getItem('user_niche');
     setAppState(isFirstAccess ? 'niche-selection' : 'dashboard');
@@ -26,6 +44,8 @@ const Index = () => {
   const handleLogout = () => {
     setUserEmail('');
     setSelectedNiche('');
+    localStorage.removeItem('user_email');
+    localStorage.removeItem('user_niche');
     setAppState('login');
   };
 
