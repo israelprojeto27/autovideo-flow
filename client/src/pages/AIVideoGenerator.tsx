@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { ArrowLeft, Plus, Sparkles, Clock, Calendar, Tag, FileText, MoreHorizontal, Play, Download, Copy, Info } from "lucide-react";
 import { useLocation } from "wouter";
@@ -34,6 +34,18 @@ const AIVideoGenerator = () => {
   const [newSchedule, setNewSchedule] = useState("");
   const [selectedScript, setSelectedScript] = useState<string>("");
   const [showScriptModal, setShowScriptModal] = useState(false);
+
+  // Load saved configuration on component mount
+  useEffect(() => {
+    const savedConfig = localStorage.getItem('ai_video_config');
+    if (savedConfig) {
+      const config = JSON.parse(savedConfig);
+      setTheme(config.theme || "");
+      setTags(config.tags || []);
+      setSelectedDays(config.selectedDays || []);
+      setSchedules(config.schedules || []);
+    }
+  }, []);
 
   // Mock data for AI generated videos
   const [aiVideos] = useState<AIVideo[]>([
@@ -135,14 +147,21 @@ const AIVideoGenerator = () => {
       return;
     }
 
-    // Here you would normally save the data
+    // Save configuration to localStorage
+    const config = {
+      theme,
+      tags,
+      selectedDays,
+      schedules
+    };
+    localStorage.setItem('ai_video_config', JSON.stringify(config));
+
     toast({
       title: "Configuração salva!",
       description: "A geração de vídeos IA foi configurada com sucesso"
     });
 
-    // Go back to dashboard
-    setLocation("/");
+    // Stay on the same page instead of navigating back
   };
 
   const handleShowScript = (script: string) => {
@@ -443,6 +462,9 @@ const AIVideoGenerator = () => {
               <FileText className="w-5 h-5" />
               Script do Vídeo
             </DialogTitle>
+            <DialogDescription>
+              Texto gerado pela inteligência artificial para este vídeo
+            </DialogDescription>
           </DialogHeader>
           <div className="mt-4">
             <div className="bg-muted/50 p-4 rounded-lg">
