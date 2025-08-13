@@ -67,7 +67,7 @@ export const NewVideoModal = ({ open, onOpenChange, onSubmit }: NewVideoModalPro
             <div className="w-8 h-8 bg-gradient-to-r from-primary to-primary-glow rounded-lg flex items-center justify-center">
               <Sparkles className="w-4 h-4 text-white" />
             </div>
-            <span>Nova Geração de Vídeo</span>
+            <span>Gerar Clips</span>
           </DialogTitle>
           <DialogDescription>
             Cole o link de um vídeo do YouTube para começar a geração automática de clips

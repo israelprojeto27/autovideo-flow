@@ -55,7 +55,7 @@ export const DashboardHeader = ({ userEmail, onNewVideo, onLogout }: DashboardHe
         <div className="flex items-center space-x-4">
           <Button onClick={onNewVideo} className="bg-gradient-to-r from-primary to-primary-glow hover:opacity-90">
             <Video className="w-4 h-4 mr-2" />
-            Nova Geração
+            Gerar Clips
           </Button>
 
           <Button
