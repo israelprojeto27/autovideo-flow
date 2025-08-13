@@ -6,6 +6,7 @@ import { Router, Route } from "wouter";
 import { queryClient } from "@/lib/queryClient";
 import Index from "./pages/Index";
 import VideoDetails from "./pages/VideoDetails";
+import AIVideoGenerator from "./pages/AIVideoGenerator";
 import NotFound from "./pages/NotFound";
 
 const App = () => (
@@ -16,6 +17,7 @@ const App = () => (
       <Router>
         <Route path="/" component={Index} />
         <Route path="/video/:id" component={VideoDetails} />
+        <Route path="/ai-video-generator" component={AIVideoGenerator} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route component={NotFound} />
       </Router>

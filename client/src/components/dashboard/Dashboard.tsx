@@ -232,6 +232,7 @@ export const Dashboard = ({ userEmail, onLogout }: DashboardProps) => {
       <DashboardHeader
         userEmail={userEmail}
         onNewVideo={() => setShowNewVideoModal(true)}
+        onNewAIVideo={() => setLocation("/ai-video-generator")}
         onLogout={onLogout}
       />
       

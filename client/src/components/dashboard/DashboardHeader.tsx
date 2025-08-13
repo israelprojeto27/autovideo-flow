@@ -2,16 +2,17 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Video, Settings, LogOut, TrendingUp, Moon, Sun, Monitor } from "lucide-react";
+import { Video, Settings, LogOut, TrendingUp, Moon, Sun, Monitor, Sparkles } from "lucide-react";
 import { useTheme } from "next-themes";
 
 interface DashboardHeaderProps {
   userEmail: string;
   onNewVideo: () => void;
+  onNewAIVideo: () => void;
   onLogout: () => void;
 }
 
-export const DashboardHeader = ({ userEmail, onNewVideo, onLogout }: DashboardHeaderProps) => {
+export const DashboardHeader = ({ userEmail, onNewVideo, onNewAIVideo, onLogout }: DashboardHeaderProps) => {
   const { theme, setTheme } = useTheme();
 
   const cycleTheme = () => {
@@ -56,6 +57,10 @@ export const DashboardHeader = ({ userEmail, onNewVideo, onLogout }: DashboardHe
           <Button onClick={onNewVideo} className="bg-gradient-to-r from-primary to-primary-glow hover:opacity-90">
             <Video className="w-4 h-4 mr-2" />
             Gerar Clips
+          </Button>
+          <Button onClick={onNewAIVideo} variant="outline" className="border-primary text-primary hover:bg-primary/10">
+            <Sparkles className="w-4 h-4 mr-2" />
+            Gerar Videos IA
           </Button>
 
           <Button
